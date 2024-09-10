@@ -1,0 +1,25 @@
+---
+import type { Article } from '@lib/article/types'
+
+interface Props {
+	article?: Article
+}
+
+const { article } = Astro.props
+---
+
+<form class='flex flex-col gap-5 max-w-7xl min-w-full p-10' method='POST'>
+	<label class='input input-bordered flex items-center'>
+		<input type='text' class='grow' name='title' placeholder='Some title...' value={article?.title ?? ''} />
+	</label>
+	<div class='flex items-center flex-col'>
+		<textarea
+			class='textarea textarea-bordered w-full min-h-[400px] p-2 resize'
+			name='content'
+			placeholder='Lorem ipsum...'
+			required={true}>{article ? article.content : ''}</textarea
+		>
+	</div>
+
+	<button type='submit' class='btn btn-primary'>{article ? 'Save' : 'Create'}</button>
+</form>
